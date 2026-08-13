@@ -326,6 +326,23 @@ lo 生态文档由 **lo-meta** 仓库统一聚合（**一个仓库看所有文�
 > 各仓库根 `AGENTS.md` 为薄入口，指向本总纲；opencode 全局 `instructions` 自动加载总纲，
 > 各仓库 `opencode.json` 的 `references` 指向 `ouuabb/lo-meta`。
 
+### 5.2 文档系统设计原则（如实反映代码）
+
+生态文档系统遵循 5 条原则（lo-agent-plugins 为参考实现），确保文档**如实反映代码**：
+
+1. **来源导向**：每个结论可回溯到 `file:line` + 契约文档链接；文档头部标注
+   「核对基线 commit/日期」。
+2. **生成式目录**：插件目录/扩展点清单由 `packages/*/plugin.json` 生成（`docs-gen`），
+   杜绝手写漂移；人工只写 prose。
+3. **一致性校验**：`docs-check` 脚本校验「packages ↔ 文档目录」「manifest ↔ 生成表」
+   「dist ↔ packages」「文档引用路径存在」；接入 CI。
+4. **分层不重复**：README 只做入口；不重复生态总纲 / SDK `manifest-spec.md`，只引用。
+5. **进度如实**：功能矩阵明确 **已实现/部分/未实现** + 代码位置 + 验证方式；未实现清单
+   （marketplace、单测、CI 等）显式写出。
+
+> 实现位置：`lo-agent-plugins/scripts/docs-gen.cjs`、`docs-check.cjs`、`docs/`；
+> 机器事实层与人工解释层分离，`docs-check` 只校验机器可确定事实、不校验语义。
+
 ---
 
 ## 6. 写完审查代码（Self-Review Checklist）
@@ -461,6 +478,7 @@ Core Plugin 生态完善 > Agent Plugin Runtime（按实际需求设计）。
   插件 id kebab-case 且与目录名一致。
 
 ### 12.6 文档系统收敛
+- 文档系统设计遵循 5 条原则（来源导向/生成式目录/一致性校验/分层不重复/进度如实）——见 **§5.2**。
 - 机器事实层由 manifest 生成（`docs-gen`），`docs/plugins/index.md` **勿手改**。
 - `docs-check` 只校验机器可确定事实（格式/id 唯一/生成幂等/orphan/引用路径/dist 一致），
   **不校验语义**；不强制每插件有 prose 文档。
