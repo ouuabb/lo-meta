@@ -1,0 +1,15 @@
+{
+  "name": "lo-meta",
+  "version": "0.1.0",
+  "private": true,
+  "description": "lo 生态文档中心（VitePress）：总纲 + 规格 + 各仓库文档聚合",
+  "scripts": {
+    "sync": "node scripts/sync.cjs",
+    "docs:dev": "vitepress dev .",
+    "docs:build": "vitepress build .",
+    "docs:preview": "vitepress preview ."
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  }
+}
