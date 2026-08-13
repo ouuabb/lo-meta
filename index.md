@@ -32,8 +32,9 @@
 
 | 仓库 | 聚合位置 |
 |---|---|
+| lo-agent（Electron 桌面端 + 插件宿主） | [`repos/lo-agent/`](repos/lo-agent/index.md) |
 | lo-agent-plugins（客户端插件仓库） | [`repos/lo-agent-plugins/`](repos/lo-agent-plugins/index.md) |
-| （未来：lo-agent / lo-client-sdk / lo-plugins / …） | — |
+| （未来：lo-client-sdk / lo-plugins / …） | — |
 
 ## 使用方式
 

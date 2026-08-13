@@ -18,8 +18,9 @@ const path = require('path');
 // 工作区根（lo/）：本脚本位于 <workspace>/docs/scripts/
 const WORKSPACE = path.resolve(__dirname, '..', '..');
 const REPOS = [
+  { dir: 'lo-agent', name: 'lo-agent' },
   { dir: 'lo-agent-plugins', name: 'lo-agent-plugins' },
-  // 未来聚合：{ dir: 'lo-agent', name: 'lo-agent' }, { dir: 'lo-client-sdk', name: 'lo-client-sdk' }, ...
+  // 未来聚合：{ dir: 'lo-client-sdk', name: 'lo-client-sdk' }, { dir: 'lo-plugins', name: 'lo-plugins' }, ...
 ];
 const OUT_DIR = path.resolve(__dirname, '..', 'repos');
 
