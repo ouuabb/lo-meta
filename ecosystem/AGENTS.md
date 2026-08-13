@@ -309,6 +309,23 @@ Plugin → ctx.extensions（契约）→ Host ExtensionRegistry（实现）→ �
 - 新增仓库或改变仓库职责 → 本总纲 §0。
 - 注释过期（如"执行由后续 Runtime 管理"这类已实现）→ 立即修正，避免误导。
 
+### 5.1 文档聚合（lo-meta）——文档更新方法
+
+lo 生态文档由 **lo-meta** 仓库统一聚合（**一个仓库看所有文档**）：
+- `ecosystem/AGENTS.md`——本总纲（唯一权威，含 §12 不可触犯边界）
+- `specs/`——生态规格文档（001–013）
+- `repos/<仓库>/`——各仓库 `docs/` 的**镜像**
+
+**文档更新流程（必须遵守）**：
+1. **各仓库 `docs/` 是文档事实源**；lo-meta 的 `repos/<仓库>/` 是镜像，**勿手改**。
+2. 改文档：先改**对应仓库源 `docs/`**（本总纲与规格直接在 lo-meta 内改）。
+3. 重聚合：在 lo-meta 跑 `node scripts/sync.cjs`（幂等，把各仓库 `docs/` 镜像到 `repos/<仓库>/`）。
+4. 提交：仓库源文档提交到对应仓库；总纲/规格/镜像提交到 lo-meta。
+5. 新增聚合仓库：在 lo-meta `scripts/sync.cjs` 的 `REPOS` 数组追加 `{ dir, name }` 后跑 sync。
+
+> 各仓库根 `AGENTS.md` 为薄入口，指向本总纲；opencode 全局 `instructions` 自动加载总纲，
+> 各仓库 `opencode.json` 的 `references` 指向 `ouuabb/lo-meta`。
+
 ---
 
 ## 6. 写完审查代码（Self-Review Checklist）
@@ -448,6 +465,8 @@ Core Plugin 生态完善 > Agent Plugin Runtime（按实际需求设计）。
 - `docs-check` 只校验机器可确定事实（格式/id 唯一/生成幂等/orphan/引用路径/dist 一致），
   **不校验语义**；不强制每插件有 prose 文档。
 - 整体基线 `docs/.baseline`（commit + 日期）而非逐篇维护。
+- 文档统一聚合到 **lo-meta**（总纲 + 规格 + 各仓库 `docs/` 镜像）；更新方法见 **§5.1**，
+  `repos/<仓库>/` 为镜像勿手改。
 
 ### 12.7 纠偏记录
 - **服务消费权限守卫不是 spec 要求**（早期误列已收回）；service 相关仅「提供者须激活 +
