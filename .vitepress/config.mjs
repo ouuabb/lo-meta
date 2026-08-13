@@ -41,12 +41,12 @@ export default defineConfig({
   // GitHub Pages 项目站点部署在 /lo-meta/ 子路径
   base: '/lo-meta/',
   srcDir: '.',
-  srcExclude: ['**/scripts/**', '**/README.md'],
+  srcExclude: ['**/scripts/**', 'README.md'],
   outDir: 'dist',
   cleanOutDir: true,
   lastUpdated: true,
-  // .baseline（仓库基线文件）与 .cjs（脚本）非站点页面，忽略其链接；.md 死链仍检查
-  ignoreDeadLinks: [/\.baseline$/, /\.cjs$/],
+  // .baseline（仓库基线文件）、.cjs（脚本）、.jsonc（配置文件）非站点页面，忽略其链接；.md 死链仍检查
+  ignoreDeadLinks: [/\.baseline$/, /\.cjs$/, /\.jsonc$/],
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
@@ -54,12 +54,14 @@ export default defineConfig({
       { text: '规格', link: '/specs/001-execution-context-protocol' },
       { text: 'lo-agent', link: '/repos/lo-agent/index' },
       { text: 'lo-agent-plugins', link: '/repos/lo-agent-plugins/index' },
+      { text: '复现指南', link: '/setup/README' },
     ],
     sidebar: {
       '/ecosystem/': tree('ecosystem'),
       '/specs/': tree('specs'),
       '/repos/lo-agent/': tree('repos/lo-agent'),
       '/repos/lo-agent-plugins/': tree('repos/lo-agent-plugins'),
+      '/setup/': tree('setup'),
     },
     outline: { level: [2, 3], label: '本页' },
     docFooter: { prev: '上一篇', next: '下一篇' },
