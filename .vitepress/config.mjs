@@ -38,6 +38,8 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'lo-meta · lo 生态文档中心',
   description: 'lo 生态权威文档聚合仓库：总纲 + 规格 + 各仓库文档',
+  // GitHub Pages 项目站点部署在 /lo-meta/ 子路径
+  base: '/lo-meta/',
   srcDir: '.',
   srcExclude: ['**/scripts/**', '**/README.md'],
   outDir: 'dist',
